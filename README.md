@@ -12,7 +12,7 @@
   6. 处理hash值
   7. 处理自带参数
 - [x] 处理请求body
-- [x] 处理请求head
+- [x] 处理请求headers
 - [x] 处理响应数据
-- [x] 处理响应head
-- [] 处理响应data
+- [x] 处理响应headers
+- [x] 处理响应data
