@@ -8,16 +8,17 @@ export function isPlainObject(val: any) {
 
 export function extend<T, U>(to: T, form: U): T & U {
   function copy(instance: Record<string, any>) {
-    const proto = Reflect.getPrototypeOf(instance)
-    if (proto !== null) {
-      Object.getOwnPropertyNames(proto).forEach((key) => {
-        Object.assign(to, {
-          [key]: instance[key]
-        })
+    Object.getOwnPropertyNames(instance).forEach((key) => {
+      Object.assign(to, {
+        [key]: instance[key]
       })
+    })
+    const proto = Reflect.getPrototypeOf(instance)
+
+    if (proto !== null) {
+      copy(proto)
     }
   }
-
   copy(form)
   return to as T & U
 }
