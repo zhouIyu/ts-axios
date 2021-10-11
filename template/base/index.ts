@@ -84,3 +84,15 @@ axios({
     b: 2
   }
 })
+
+axios({
+  url: '/base/post',
+  method: 'post',
+  headers: {
+    'content-type': 'application/json'
+  },
+  data: {
+    a: 2,
+    b: 3
+  }
+})
