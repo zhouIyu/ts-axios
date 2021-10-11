@@ -1,18 +1,19 @@
 {
-  "name": "ts-lib-template",
+  "name": "ts-axios",
   "version": "0.0.1",
   "description": "typescript lib template",
-  "main": "dist/index.umd.js",
-  "module": "dist/index.es5.js",
+  "main": "dist/axios.umd.js",
+  "module": "dist/axios.es5.js",
   "scripts": {
+    "serve": "vite",
     "dev": "rollup -c ./rollup.config.js",
     "prepare": "husky install",
     "lint": "lint-staged",
-    "cz": "git-cz"
+    "cz": "git add . && git-cz"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhouIyu/ts-lib-template.git"
+    "url": "git+https://github.com/zhouIyu/ts-axios.git"
   },
   "keywords": [
     "typescript",
@@ -21,9 +22,9 @@
   "author": "zhouIyu<zhouzhuang95@126.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zhouIyu/ts-lib-template/issues"
+    "url": "https://github.com/zhouIyu/ts-axios/issues"
   },
-  "homepage": "https://github.com/zhouIyu/ts-lib-template#readme",
+  "homepage": "https://github.com/zhouIyu/ts-axios#readme",
   "devDependencies": {
     "@commitlint/cli": "^13.2.0",
     "@commitlint/config-conventional": "^13.2.0",
@@ -37,13 +38,16 @@
     "husky": "^7.0.2",
     "lint-staged": "^11.2.0",
     "lodash.camelcase": "^4.3.0",
+    "mockjs": "^1.1.0",
     "prettier": "^2.4.1",
     "rollup": "^2.58.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-typescript2": "^0.30.0",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.3",
+    "vite": "^2.6.5",
+    "vite-plugin-mock": "^2.9.6"
   },
   "config": {
     "commitizen": {
