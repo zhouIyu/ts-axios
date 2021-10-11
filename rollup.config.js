@@ -8,7 +8,7 @@ const pkg = require('./package.json')
 const libraryName = pkg.name
 
 export default {
-  input: 'src/index.ts',
+  input: 'src/axios.ts',
   output: [
     { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true },
     { file: pkg.module, format: 'es', sourcemap: true }
