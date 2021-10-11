@@ -3,7 +3,7 @@
 ## TODO
 
 - [x] 基础请求
-- [] 处理URL参数
+- [x] 处理URL参数
   1. 参数为Array
   2. 参数为Object
   3. 参数为Date

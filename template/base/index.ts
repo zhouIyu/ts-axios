@@ -73,3 +73,14 @@ axios({
     b: 3
   }
 })
+
+// ###
+
+axios({
+  url: '/base/post',
+  method: 'post',
+  data: {
+    a: 1,
+    b: 2
+  }
+})
