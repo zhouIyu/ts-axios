@@ -1,6 +1,8 @@
-function greeter(name: string): string {
-  return `Hello ${name}`
+import { AxiosRequestConfig } from './type'
+import xhr from './xhr'
+
+function axios(config: AxiosRequestConfig) {
+  xhr(config)
 }
 
-const a = greeter('Jon')
-console.log(a)
+export default axios
