@@ -37,5 +37,20 @@ export default [
     response: ({ body }: any) => {
       return body
     }
+  },
+  {
+    url: '/extend/user',
+    method: 'get',
+    response: () => {
+      const user = {
+        name: 'Jon',
+        age: 13
+      }
+      return {
+        code: 0,
+        data: user,
+        message: '请求成功'
+      }
+    }
   }
 ] as MockMethod[]
