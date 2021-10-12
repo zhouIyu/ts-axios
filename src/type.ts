@@ -25,6 +25,7 @@ export interface AxiosRequestConfig {
   transformRequest?: AxiosTransformer | AxiosTransformer[]
   transformResponse?: AxiosTransformer | AxiosTransformer[]
   cancelToken?: CancelToken
+  withCredentials?: boolean
 
   [propName: string]: any
 }
@@ -107,6 +108,7 @@ export interface CancelStatic {
 export interface CancelToken {
   promise: Promise<Cancel>
   reason?: Cancel
+
   throwIfRequested(): void
 }
 
