@@ -1,4 +1,4 @@
-import { isDate, isPlainObject } from './util'
+import { isDate, isPlainObject, isURLSearchParams } from './util'
 
 function encode(val: string): string {
   return encodeURIComponent(val)
@@ -11,36 +11,45 @@ function encode(val: string): string {
     .replace(/%5D/gi, ']')
 }
 
-export function buildURL(url: string, params: any): string {
+export function buildURL(
+  url: string,
+  params?: any,
+  paramsSerializer?: (params: any) => string
+): string {
   if (!params) {
     return url
   }
-
-  const parts: string[] = []
-  Object.keys(params).forEach((key) => {
-    const val = params[key]
-    if (val === null || typeof val === 'undefined') {
-      return
-    }
-    let values: string[] = []
-    if (Array.isArray(val)) {
-      values = val
-      key += '[]'
-    } else {
-      values = [val]
-    }
-
-    values.forEach((value) => {
-      if (isDate(value)) {
-        value = value.toISOString()
-      } else if (isPlainObject(value)) {
-        value = JSON.stringify(value)
+  let serializedParams: string
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params)
+  } else if (isURLSearchParams(params)) {
+    serializedParams = params.toString()
+  } else {
+    const parts: string[] = []
+    Object.keys(params).forEach((key) => {
+      const val = params[key]
+      if (val === null || typeof val === 'undefined') {
+        return
       }
-      parts.push(`${encode(key)}=${encode(value)}`)
-    })
-  })
+      let values: string[] = []
+      if (Array.isArray(val)) {
+        values = val
+        key += '[]'
+      } else {
+        values = [val]
+      }
 
-  const serializedParams = parts.join('&')
+      values.forEach((value) => {
+        if (isDate(value)) {
+          value = value.toISOString()
+        } else if (isPlainObject(value)) {
+          value = JSON.stringify(value)
+        }
+        parts.push(`${encode(key)}=${encode(value)}`)
+      })
+    })
+    serializedParams = parts.join('&')
+  }
   if (serializedParams) {
     const hashIndex = url.indexOf('#')
     const markIndex = url.indexOf('?')
@@ -76,4 +85,12 @@ export function isURLSameOrigin(requestURL: string): boolean {
   return (
     parsedOrigin.protocol === currentOrigin.protocol && parsedOrigin.host === currentOrigin.host
   )
+}
+
+export function isAbsoluteURL(url: string): boolean {
+  return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url)
+}
+
+export function combineURL(baseURL: string, relativeURL?: string): string {
+  return relativeURL ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL
 }
