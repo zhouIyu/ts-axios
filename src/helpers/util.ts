@@ -6,6 +6,10 @@ export function isPlainObject(val: any) {
   return Object.prototype.toString.call(val) === '[object Object]'
 }
 
+export function isFormData(val: any): val is FormData {
+  return typeof val !== 'undefined' && val instanceof FormData
+}
+
 export function extend<T, U>(to: T, form: U): T & U {
   function copy(instance: Record<string, any>) {
     Object.getOwnPropertyNames(instance).forEach((key) => {
